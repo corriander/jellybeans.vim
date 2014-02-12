@@ -66,6 +66,18 @@ else
   let s:low_color = 1
 endif
 
+if !exists("g:jellybeans_background_color")
+  let g:jellybeans_background_color = "151515"
+end
+
+set background=dark
+
+if !exists("g:jellybeans_use_lowcolor_black") || g:jellybeans_use_lowcolor_black
+    let s:termBlack = "Black"
+else
+    let s:termBlack = "Grey"
+endif
+
 " }}}
 " Color approximation functions {{{
 " by Henry So, Jr. and David Liang
@@ -301,22 +313,10 @@ fun! s:X(group, fg, bg, attr, lcfg, lcbg)
   endif
 endfun
 " }}}
-" Parse options {{{
-if !exists("g:jellybeans_background_color")
-  let g:jellybeans_background_color = "151515"
-end
+" Apply scheme {{{
 
 call s:X("Normal","e8e8d3",g:jellybeans_background_color,"","White","")
-set background=dark
 
-if !exists("g:jellybeans_use_lowcolor_black") || g:jellybeans_use_lowcolor_black
-    let s:termBlack = "Black"
-else
-    let s:termBlack = "Grey"
-endif
-
-" }}}
-" Apply scheme {{{
 if version >= 700
   call s:X("CursorLine","","1c1c1c","","",s:termBlack)
   call s:X("CursorColumn","","1c1c1c","","",s:termBlack)
