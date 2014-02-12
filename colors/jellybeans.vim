@@ -22,6 +22,7 @@
 "               Rich Healey (richo)
 "               Andrew Wong (w0ng)
 "
+" License {{{
 " Copyright (c) 2009-2012 NanoTech
 "
 " Permission is hereby granted, free of charge, to any per‐
@@ -47,6 +48,7 @@
 " NECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 " THE SOFTWARE.
 
+" }}}
 " Configuration {{{
 set background=dark
 
