@@ -70,8 +70,6 @@ if !exists("g:jellybeans_background_color")
   let g:jellybeans_background_color = "151515"
 end
 
-set background=dark
-
 if !exists("g:jellybeans_use_lowcolor_black") || g:jellybeans_use_lowcolor_black
     let s:termBlack = "Black"
 else
