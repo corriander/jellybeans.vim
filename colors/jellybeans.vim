@@ -47,6 +47,7 @@
 " NECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 " THE SOFTWARE.
 
+" Configuration {{{
 set background=dark
 
 hi clear
@@ -63,8 +64,10 @@ else
   let s:low_color = 1
 endif
 
-" Color approximation functions by Henry So, Jr. and David Liang {{{
-" Added to jellybeans.vim by Daniel Herbert
+" }}}
+" Color approximation functions {{{
+" by Henry So, Jr. and David Liang
+" added to jellybeans.vim by Daniel Herbert
 
 " returns an approximate grey index for the given grey level
 fun! s:grey_number(x)
@@ -296,7 +299,7 @@ fun! s:X(group, fg, bg, attr, lcfg, lcbg)
   endif
 endfun
 " }}}
-
+" Parse options {{{
 if !exists("g:jellybeans_background_color")
   let g:jellybeans_background_color = "151515"
 end
@@ -310,6 +313,8 @@ else
     let s:termBlack = "Grey"
 endif
 
+" }}}
+" Apply scheme {{{
 if version >= 700
   call s:X("CursorLine","","1c1c1c","","",s:termBlack)
   call s:X("CursorColumn","","1c1c1c","","",s:termBlack)
@@ -372,27 +377,30 @@ hi! link Error ErrorMsg
 hi! link MoreMsg Special
 call s:X("Question","65C254","","","Green","")
 
-
-" Spell Checking
+" }}}
+" Spell Checking {{{
 
 call s:X("SpellBad","","902020","underline","","DarkRed")
 call s:X("SpellCap","","0000df","underline","","Blue")
 call s:X("SpellRare","","540063","underline","","DarkMagenta")
 call s:X("SpellLocal","","2D7067","underline","","Green")
 
-" Diff
+" }}}
+" Diff {{{
 
 hi! link diffRemoved Constant
 hi! link diffAdded String
 
-" VimDiff
+" }}}
+" VimDiff {{{
 
 call s:X("DiffAdd","D2EBBE","437019","","White","DarkGreen")
 call s:X("DiffDelete","40000A","700009","","DarkRed","DarkRed")
 call s:X("DiffChange","","2B5B77","","White","DarkBlue")
 call s:X("DiffText","8fbfdc","000000","reverse","Yellow","")
 
-" PHP
+" }}}
+" PHP {{{
 
 hi! link phpFunctions Function
 call s:X("StorageClass","c59f6f","","","Red","")
@@ -406,11 +414,13 @@ hi! link phpOperator Normal
 hi! link phpRelation Normal
 hi! link phpVarSelector Identifier
 
-" Python
+" }}}
+" Python {{{
 
 hi! link pythonOperator Statement
 
-" Ruby
+" }}}
+" Ruby {{{
 
 hi! link rubySharpBang Comment
 call s:X("rubyClass","447799","","","DarkBlue","")
@@ -434,7 +444,8 @@ call s:X("rubyRegexpSpecial","a40073","","","Magenta","")
 
 call s:X("rubyPredefinedIdentifier","de5577","","","Red","")
 
-" Erlang
+" }}}
+" Erlang {{{
 
 hi! link erlangAtom rubySymbol
 hi! link erlangBIF rubyPredefinedIdentifier
@@ -442,25 +453,30 @@ hi! link erlangFunction rubyPredefinedIdentifier
 hi! link erlangDirective Statement
 hi! link erlangNode Identifier
 
-" JavaScript
+" }}}
+" JavaScript {{{
 
 hi! link javaScriptValue Constant
 hi! link javaScriptRegexpString rubyRegexp
 
-" CoffeeScript
+" }}}
+" CoffeeScript {{{
 
 hi! link coffeeRegExp javaScriptRegexpString
 
-" Lua
+" }}}
+" Lua {{{
 
 hi! link luaOperator Conditional
 
-" C
+" }}}
+" C {{{
 
 hi! link cFormat Identifier
 hi! link cOperator Constant
 
-" Objective-C/Cocoa
+" }}}
+" Objective-C/Cocoa {{{
 
 hi! link objcClass Type
 hi! link cocoaClass objcClass
@@ -473,16 +489,19 @@ hi! link objcMethodName Identifier
 hi! link objcMethodArg Normal
 hi! link objcMessageName Identifier
 
-" Vimscript
+" }}}
+" Vimscript {{{
 
 hi! link vimOper Normal
 
-" Debugger.vim
+" }}}
+" Debugger.vim {{{
 
 call s:X("DbgCurrent","DEEBFE","345FA8","","White","DarkBlue")
 call s:X("DbgBreakPt","","4F0037","","","DarkMagenta")
 
-" vim-indent-guides
+" }}}
+" vim-indent-guides {{{
 
 if !exists("g:indent_guides_auto_colors")
   let g:indent_guides_auto_colors = 0
@@ -490,7 +509,8 @@ endif
 call s:X("IndentGuidesOdd","","232323","","","")
 call s:X("IndentGuidesEven","","1b1b1b","","","")
 
-" Plugins, etc.
+" }}}
+" Plugins, etc. {{{
 
 hi! link TagListFileName Directory
 call s:X("PreciseJumpTarget","B9ED67","405026","","White","Green")
@@ -498,7 +518,10 @@ call s:X("PreciseJumpTarget","B9ED67","405026","","White","Green")
 if !exists("g:jellybeans_background_color_256")
   let g:jellybeans_background_color_256=233
 end
-" Manual overrides for 256-color terminals. Dark colors auto-map badly.
+
+" }}}
+" Manual overrides for 256-color terminals. {{{
+" Dark colors auto-map badly.
 if !s:low_color
   hi StatusLineNC ctermbg=235
   hi Folded ctermbg=236
@@ -538,7 +561,8 @@ if exists("g:jellybeans_overrides")
   delf s:load_colors
 endif
 
-" delete functions {{{
+" }}}
+" Delete functions {{{
 delf s:X
 delf s:rgb
 delf s:color
