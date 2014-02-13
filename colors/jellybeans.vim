@@ -76,6 +76,12 @@ else
     let s:termBlack = "Grey"
 endif
 
+if exists("g:jellybeans_term_trans")
+  let s:transparent = 1
+else
+  let s:transparent = 0
+endif
+
 " }}}
 " Color approximation functions {{{
 " by Henry So, Jr. and David Liang
@@ -579,6 +585,13 @@ if exists("g:jellybeans_overrides")
 endif
 
 " }}}
+" Manual overrides for transparent background {{{
+if s:transparent
+	hi Normal ctermbg=NONE
+	hi NonText ctermbg=NONE
+endif
+
+"}}}
 " Delete functions {{{
 delf s:X
 delf s:rgb
