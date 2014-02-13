@@ -22,6 +22,7 @@
 "               Rich Healey (richo)
 "               Andrew Wong (w0ng)
 "
+" License {{{
 " Copyright (c) 2009-2012 NanoTech
 "
 " Permission is hereby granted, free of charge, to any per‐
@@ -47,6 +48,8 @@
 " NECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 " THE SOFTWARE.
 
+" }}}
+" Configuration {{{
 set background=dark
 
 hi clear
@@ -63,9 +66,22 @@ else
   let s:low_color = 1
 endif
 
-" Color approximation functions by Henry So, Jr. and David Liang {{{
-" Added to jellybeans.vim by Daniel Herbert
+if !exists("g:jellybeans_background_color")
+  let g:jellybeans_background_color = "151515"
+end
 
+if !exists("g:jellybeans_use_lowcolor_black") || g:jellybeans_use_lowcolor_black
+    let s:termBlack = "Black"
+else
+    let s:termBlack = "Grey"
+endif
+
+" }}}
+" Color approximation functions {{{
+" by Henry So, Jr. and David Liang
+" added to jellybeans.vim by Daniel Herbert
+
+" f = grey_number() {{{2
 " returns an approximate grey index for the given grey level
 fun! s:grey_number(x)
   if &t_Co == 88
@@ -105,6 +121,8 @@ fun! s:grey_number(x)
   endif
 endfun
 
+" 2}}}
+" f = grey_level() {{{2
 " returns the actual grey level represented by the grey index
 fun! s:grey_level(n)
   if &t_Co == 88
@@ -138,6 +156,8 @@ fun! s:grey_level(n)
   endif
 endfun
 
+" 2}}}
+" f = grey_color() {{{2
 " returns the palette index for the given grey index
 fun! s:grey_color(n)
   if &t_Co == 88
@@ -159,6 +179,8 @@ fun! s:grey_color(n)
   endif
 endfun
 
+" 2}}}
+" f = rgb_number() {{{2
 " returns an approximate color index for the given color level
 fun! s:rgb_number(x)
   if &t_Co == 88
@@ -186,6 +208,8 @@ fun! s:rgb_number(x)
   endif
 endfun
 
+" 2}}}
+" f = rgb_level() {{{2
 " returns the actual color level for the given color index
 fun! s:rgb_level(n)
   if &t_Co == 88
@@ -207,6 +231,8 @@ fun! s:rgb_level(n)
   endif
 endfun
 
+" 2}}}
+" f = rgb_color() {{{2
 " returns the palette index for the given R/G/B color indices
 fun! s:rgb_color(x, y, z)
   if &t_Co == 88
@@ -216,6 +242,8 @@ fun! s:rgb_color(x, y, z)
   endif
 endfun
 
+" 2}}}
+" f = color() {{{2
 " returns the palette index to approximate the given R/G/B color levels
 fun! s:color(r, g, b)
   " get the closest grey
@@ -251,6 +279,8 @@ fun! s:color(r, g, b)
   endif
 endfun
 
+" 2}}}
+" f = rgb() {{{2
 " returns the palette index to approximate the 'rrggbb' hex string
 fun! s:rgb(rgb)
   let l:r = ("0x" . strpart(a:rgb, 0, 2)) + 0
@@ -295,20 +325,11 @@ fun! s:X(group, fg, bg, attr, lcfg, lcbg)
     exec "hi ".a:group." gui=".a:attr." cterm=".l:noitalic
   endif
 endfun
+" 2}}}
 " }}}
-
-if !exists("g:jellybeans_background_color")
-  let g:jellybeans_background_color = "151515"
-end
+" Apply scheme {{{
 
 call s:X("Normal","e8e8d3",g:jellybeans_background_color,"","White","")
-set background=dark
-
-if !exists("g:jellybeans_use_lowcolor_black") || g:jellybeans_use_lowcolor_black
-    let s:termBlack = "Black"
-else
-    let s:termBlack = "Grey"
-endif
 
 if version >= 700
   call s:X("CursorLine","","1c1c1c","","",s:termBlack)
@@ -372,27 +393,30 @@ hi! link Error ErrorMsg
 hi! link MoreMsg Special
 call s:X("Question","65C254","","","Green","")
 
-
-" Spell Checking
+" Language/application-specific highlighting
+" Spell Checking {{{2
 
 call s:X("SpellBad","","902020","underline","","DarkRed")
 call s:X("SpellCap","","0000df","underline","","Blue")
 call s:X("SpellRare","","540063","underline","","DarkMagenta")
 call s:X("SpellLocal","","2D7067","underline","","Green")
 
-" Diff
+" 2}}}
+" Diff {{{2
 
 hi! link diffRemoved Constant
 hi! link diffAdded String
 
-" VimDiff
+" 2}}}
+" VimDiff {{{2
 
 call s:X("DiffAdd","D2EBBE","437019","","White","DarkGreen")
 call s:X("DiffDelete","40000A","700009","","DarkRed","DarkRed")
 call s:X("DiffChange","","2B5B77","","White","DarkBlue")
 call s:X("DiffText","8fbfdc","000000","reverse","Yellow","")
 
-" PHP
+" 2}}}
+" PHP {{{2
 
 hi! link phpFunctions Function
 call s:X("StorageClass","c59f6f","","","Red","")
@@ -406,11 +430,13 @@ hi! link phpOperator Normal
 hi! link phpRelation Normal
 hi! link phpVarSelector Identifier
 
-" Python
+" 2}}}
+" Python {{{2
 
 hi! link pythonOperator Statement
 
-" Ruby
+" 2}}}
+" Ruby {{{2
 
 hi! link rubySharpBang Comment
 call s:X("rubyClass","447799","","","DarkBlue","")
@@ -434,7 +460,8 @@ call s:X("rubyRegexpSpecial","a40073","","","Magenta","")
 
 call s:X("rubyPredefinedIdentifier","de5577","","","Red","")
 
-" Erlang
+" 2}}}
+" Erlang {{{2
 
 hi! link erlangAtom rubySymbol
 hi! link erlangBIF rubyPredefinedIdentifier
@@ -442,25 +469,30 @@ hi! link erlangFunction rubyPredefinedIdentifier
 hi! link erlangDirective Statement
 hi! link erlangNode Identifier
 
-" JavaScript
+" 2}}}
+" JavaScript {{{2
 
 hi! link javaScriptValue Constant
 hi! link javaScriptRegexpString rubyRegexp
 
-" CoffeeScript
+" 2}}}
+" CoffeeScript {{{2
 
 hi! link coffeeRegExp javaScriptRegexpString
 
-" Lua
+" 2}}}
+" Lua {{{2
 
 hi! link luaOperator Conditional
 
-" C
+" 2}}}
+" C {{{2
 
 hi! link cFormat Identifier
 hi! link cOperator Constant
 
-" Objective-C/Cocoa
+" 2}}}
+" Objective-C/Cocoa {{{2
 
 hi! link objcClass Type
 hi! link cocoaClass objcClass
@@ -473,16 +505,19 @@ hi! link objcMethodName Identifier
 hi! link objcMethodArg Normal
 hi! link objcMessageName Identifier
 
-" Vimscript
+" 2}}}
+" Vimscript {{{2
 
 hi! link vimOper Normal
 
-" Debugger.vim
+" 2}}}
+" Debugger.vim {{{2
 
 call s:X("DbgCurrent","DEEBFE","345FA8","","White","DarkBlue")
 call s:X("DbgBreakPt","","4F0037","","","DarkMagenta")
 
-" vim-indent-guides
+" 2}}}
+" vim-indent-guides {{{2
 
 if !exists("g:indent_guides_auto_colors")
   let g:indent_guides_auto_colors = 0
@@ -490,7 +525,8 @@ endif
 call s:X("IndentGuidesOdd","","232323","","","")
 call s:X("IndentGuidesEven","","1b1b1b","","","")
 
-" Plugins, etc.
+" 2}}}
+" Plugins, etc. {{{2
 
 hi! link TagListFileName Directory
 call s:X("PreciseJumpTarget","B9ED67","405026","","White","Green")
@@ -498,7 +534,11 @@ call s:X("PreciseJumpTarget","B9ED67","405026","","White","Green")
 if !exists("g:jellybeans_background_color_256")
   let g:jellybeans_background_color_256=233
 end
-" Manual overrides for 256-color terminals. Dark colors auto-map badly.
+" 2}}}
+
+" }}}
+" Manual overrides for 256-color terminals. {{{
+" Dark colors auto-map badly.
 if !s:low_color
   hi StatusLineNC ctermbg=235
   hi Folded ctermbg=236
@@ -538,7 +578,8 @@ if exists("g:jellybeans_overrides")
   delf s:load_colors
 endif
 
-" delete functions {{{
+" }}}
+" Delete functions {{{
 delf s:X
 delf s:rgb
 delf s:color
@@ -549,3 +590,4 @@ delf s:grey_color
 delf s:grey_level
 delf s:grey_number
 " }}}
+" vim: foldmethod=marker
