@@ -547,6 +547,7 @@ endif
 " Manual overrides for transparent background {{{
 if s:transparent
 	hi Normal ctermbg=NONE
+	hi NonText ctermbg=NONE
 endif
 
 "}}}
