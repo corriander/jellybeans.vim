@@ -63,6 +63,12 @@ else
   let s:low_color = 1
 endif
 
+if exists("g:jellybeans_term_trans")
+  let s:transparent = 1
+else
+  let s:transparent = 0
+endif
+
 " Color approximation functions by Henry So, Jr. and David Liang {{{
 " Added to jellybeans.vim by Daniel Herbert
 
@@ -538,6 +544,12 @@ if exists("g:jellybeans_overrides")
   delf s:load_colors
 endif
 
+" Manual overrides for transparent background {{{
+if s:transparent
+	hi Normal ctermbg=NONE
+endif
+
+"}}}
 " delete functions {{{
 delf s:X
 delf s:rgb
