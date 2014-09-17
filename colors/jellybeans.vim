@@ -589,6 +589,7 @@ endif
 if s:transparent
 	hi Normal ctermbg=NONE
 	hi NonText ctermbg=NONE
+	hi SpecialKey ctermbg=NONE
 endif
 
 "}}}
