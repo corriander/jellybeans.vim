@@ -83,11 +83,12 @@ else
 endif
 
 " }}}
-" Color approximation functions {{{
+" Functions {{{
+" Color approximation functions {{{2
 " by Henry So, Jr. and David Liang
 " added to jellybeans.vim by Daniel Herbert
 
-" f = grey_number() {{{2
+" f = grey_number() {{{3
 " returns an approximate grey index for the given grey level
 fun! s:grey_number(x)
   if &t_Co == 88
@@ -127,8 +128,8 @@ fun! s:grey_number(x)
   endif
 endfun
 
-" 2}}}
-" f = grey_level() {{{2
+" 3}}}
+" f = grey_level() {{{3
 " returns the actual grey level represented by the grey index
 fun! s:grey_level(n)
   if &t_Co == 88
@@ -162,8 +163,8 @@ fun! s:grey_level(n)
   endif
 endfun
 
-" 2}}}
-" f = grey_color() {{{2
+" 3}}}
+" f = grey_color() {{{3
 " returns the palette index for the given grey index
 fun! s:grey_color(n)
   if &t_Co == 88
@@ -185,8 +186,8 @@ fun! s:grey_color(n)
   endif
 endfun
 
-" 2}}}
-" f = rgb_number() {{{2
+" 3}}}
+" f = rgb_number() {{{3
 " returns an approximate color index for the given color level
 fun! s:rgb_number(x)
   if &t_Co == 88
@@ -214,8 +215,8 @@ fun! s:rgb_number(x)
   endif
 endfun
 
-" 2}}}
-" f = rgb_level() {{{2
+" 3}}}
+" f = rgb_level() {{{3
 " returns the actual color level for the given color index
 fun! s:rgb_level(n)
   if &t_Co == 88
@@ -237,8 +238,8 @@ fun! s:rgb_level(n)
   endif
 endfun
 
-" 2}}}
-" f = rgb_color() {{{2
+" 3}}}
+" f = rgb_color() {{{3
 " returns the palette index for the given R/G/B color indices
 fun! s:rgb_color(x, y, z)
   if &t_Co == 88
@@ -248,8 +249,8 @@ fun! s:rgb_color(x, y, z)
   endif
 endfun
 
-" 2}}}
-" f = color() {{{2
+" 3}}}
+" f = color() {{{3
 " returns the palette index to approximate the given R/G/B color levels
 fun! s:color(r, g, b)
   " get the closest grey
@@ -285,8 +286,8 @@ fun! s:color(r, g, b)
   endif
 endfun
 
-" 2}}}
-" f = rgb() {{{2
+" 3}}}
+" f = rgb() {{{3
 " returns the palette index to approximate the 'rrggbb' hex string
 fun! s:rgb(rgb)
   let l:r = ("0x" . strpart(a:rgb, 0, 2)) + 0
@@ -294,8 +295,9 @@ fun! s:rgb(rgb)
   let l:b = ("0x" . strpart(a:rgb, 4, 2)) + 0
   return s:color(l:r, l:g, l:b)
 endfun
-
-" sets the highlighting for the given group
+" 3}}}
+" 2}}}
+" f = X(); Set highlighting for group {{{2
 fun! s:X(group, fg, bg, attr, lcfg, lcbg)
   if s:low_color
     let l:fge = empty(a:lcfg)
