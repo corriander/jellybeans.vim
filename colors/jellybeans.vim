@@ -591,7 +591,7 @@ endif
 if s:transparent
 	hi Normal ctermbg=NONE
 	hi NonText ctermbg=NONE
-	hi SpecialKey ctermbg=NONE
+	hi SpecialKey ctermfg=241 ctermbg=NONE
 	hi Folded ctermbg=NONE
 endif
 
